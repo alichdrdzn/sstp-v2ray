@@ -1,5 +1,5 @@
 #!/bin/bash
-apt update && apt install tcpdump htop build-essentials netfilter-persistent -y
+apt update && apt install tcpdump htop build-essential netfilter-persistent -y
 wget https://github.com/alichdrdzn/soft-down/blob/main/softether-vpnserver-v4.42-9798-rtm-2023.06.30-linux-x64-64bit.tar.gz
 wget https://github.com/alichdrdzn/soft-down/blob/main/vpn_server.config
 tar xfv softether-vpnserver-v4.42-9798-rtm-2023.06.30-linux-x64-64bit.tar.gz
