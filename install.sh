@@ -5,7 +5,7 @@ wget https://github.com/alichdrdzn/soft-down/blob/main/vpn_server.config
 tar xvf softether-vpnserver-v4.42-9798-rtm-2023.06.30-linux-x64-64bit.tar.gz
 cd vpnserver
 make
-cp /root/vpn_server.config ./
+cp /root/vpn_server.config /root/vpnserver/
 chmod 600 * && chmod 700 vpnserver && chmod 700 vpncmd
 ./vpnserver start
 sleep 2
