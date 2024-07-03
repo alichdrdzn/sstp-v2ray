@@ -3,12 +3,16 @@ bash <(curl -s -L https://raw.githubusercontent.com/alichdrdzn/soft-down/main/in
 
 
 In the shell:
+
 cd /root/vpnserver
 ./vpncmd
-1
-hub default
-ipsecenable
-sstpenable
-securenaten
-usercreate
-userpasswordset
+
+In the vpncmd:
+* Choose 1 
+* hub default
+* ipsecenable
+* sstpenable
+* securenaten
+* usercreate
+* userpasswordset
+You good to go.
