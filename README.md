@@ -14,5 +14,6 @@ In the vpncmd:
 * sstpenable
 * securenaten
 * usercreate
-* userpasswordset
-You good to go.
+* userpasswordset.
+  
+**You good to go.**
