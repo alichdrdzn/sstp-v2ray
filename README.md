@@ -4,8 +4,7 @@ bash <(curl -s -L https://raw.githubusercontent.com/alichdrdzn/soft-down/main/in
 
 In the shell:
 
-cd /root/vpnserver
-./vpncmd
+/root/vpnserver/vpncmd
 
 In the vpncmd:
 * Choose 1 
