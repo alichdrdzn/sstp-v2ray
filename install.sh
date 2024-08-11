@@ -23,4 +23,5 @@ iptables -A INPUT -p tcp --dport 5555 -j DROP
 iptables -A INPUT -p tcp --dport 1194 -j DROP
 iptables -A INPUT -p icmp -j DROP
 service netfilter-persistent save
+netfilter-persistent save
 echo -e "\ndone."
