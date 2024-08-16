@@ -13,14 +13,14 @@ netstat -ntpl
 echo "@reboot /root/vpnserver/vpnserver start" >> /var/spool/cron/crontabs/root
 echo "Port 17971" >> /etc/ssh/sshd_config
 systemctl restart sshd
-iptables -A INPUT -p udp --dport 1194 -j DROP
-iptables -A INPUT -p udp --dport 500 -j DROP
-iptables -A INPUT -p udp --dport 4500 -j DROP
-iptables -A INPUT -p tcp --dport 22 -j DROP
-iptables -A INPUT -p tcp --dport 992 -j DROP
-iptables -A INPUT -p tcp --dport 5555 -j DROP
-iptables -A INPUT -p tcp --dport 1194 -j DROP
-iptables -A INPUT -p icmp -j DROP
+iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+iptables -A INPUT -s localhost -j ACCEPT
+iptables -A INPUT -p icmp -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --sport 53 -j ACCEPT
+iptables -A INPUT -p tcp -m udp --sport 53 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 17971 -j ACCEPT
+iptables -P INPUT DROP
 service netfilter-persistent save
 netfilter-persistent save
 echo -e "\ndone."
