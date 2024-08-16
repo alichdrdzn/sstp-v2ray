@@ -17,7 +17,6 @@ iptables -A INPUT -p udp --dport 1194 -j DROP
 iptables -A INPUT -p udp --dport 500 -j DROP
 iptables -A INPUT -p udp --dport 4500 -j DROP
 iptables -A INPUT -p tcp --dport 22 -j DROP
-iptables -A INPUT -p tcp --dport 80 -j DROP
 iptables -A INPUT -p tcp --dport 992 -j DROP
 iptables -A INPUT -p tcp --dport 5555 -j DROP
 iptables -A INPUT -p tcp --dport 1194 -j DROP
