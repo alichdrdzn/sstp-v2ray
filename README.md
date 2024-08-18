@@ -3,7 +3,7 @@
 SSTP Installation:
 -------------------------------
 ```
-bash <(curl -s -L https://raw.githubusercontent.com/alichdrdzn/soft-down/main/install.sh)
+bash <(curl -s -L https://raw.githubusercontent.com/alichdrdzn/sstp-v2ray/main/install.sh)
 ```
 The script will ask you to set `username` and `password` to create a sstp user. and a `passphrase` for l2tp protocol.
 
