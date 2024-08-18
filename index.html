@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the 4-Digit Number</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #282c34;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2em;
+            color: #61dafb;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            margin-bottom: 10px;
+            width: 160px;
+            text-align: center;
+            border: none;
+            border-radius: 25px;
+            outline: none;
+            background-color: #333842;
+            color: #ffffff;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            border-radius: 25px;
+            background-color: #61dafb;
+            color: #282c34;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #21a1f1;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.9em;
+            text-align: left;
+            background-color: rgba(40, 44, 52, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .feedback-icon {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin: 0 3px;
+        }
+
+        .correct-place {
+            background-color: #1dac62;
+        }
+
+        .wrong-place {
+            background-color: #f1c40f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guess the 4-Digit Number</h1>
+    <p>Enter a 4-digit number with digits from 1 to 6:</p>
+    <input type="text" id="guessInput" maxlength="4">
+    <button onclick="makeGuess()">Guess</button>
+    <div id="message"></div>
+
+    <div id="legend">
+        <p><strong>Legend:</strong></p>
+        <div class="feedback-icon correct-place"></div> Correct digit in the correct place<br>
+        <div class="feedback-icon wrong-place"></div> Correct digit in the wrong place
+    </div>
+
+    <script>
+        const secretNumber = generateSecretNumber();
+        let attempts = 0;
+
+        function generateSecretNumber() {
+            let number = '';
+            for (let i = 0; i < 4; i++) {
+                number += Math.floor(Math.random() * 6) + 1;
+            }
+            return number;
+        }
+
+        function makeGuess() {
+            const guessInput = document.getElementById('guessInput');
+            const message = document.getElementById('message');
+            const playerGuess = guessInput.value;
+
+            if (playerGuess.length !== 4 || !/^[1-6]{4}$/.test(playerGuess)) {
+                message.textContent = "Please enter a valid 4-digit number using digits 1 to 6.";
+                return;
+            }
+
+            attempts++;
+
+            const feedback = getFeedback(playerGuess, secretNumber);
+            const feedbackIcons = feedbackToIcons(feedback);
+
+            const resultDiv = document.createElement('div');
+            resultDiv.innerHTML = `Guess #${attempts}: ${playerGuess} <br> ${feedbackIcons}`;
+            message.appendChild(resultDiv);
+
+            if (feedback.correct === 4) {
+                message.innerHTML = `<strong>Congratulations!</strong> You guessed the number ${secretNumber} correctly in ${attempts} attempts.`;
+            } else if (attempts >= 10) {
+                message.innerHTML = `<strong>Game over!</strong> The correct number was ${secretNumber}.`;
+            } else {
+                guessInput.value = '';
+            }
+        }
+
+        function getFeedback(guess, secret) {
+            let correct = 0;
+            let wrongPlace = 0;
+            const secretArr = secret.split('');
+            const guessArr = guess.split('');
+
+            // Check for correct digits in the correct place
+            for (let i = 0; i < 4; i++) {
+                if (guessArr[i] === secretArr[i]) {
+                    correct++;
+                    secretArr[i] = guessArr[i] = null;
+                }
+            }
+
+            // Check for correct digits in the wrong place
+            for (let i = 0; i < 4; i++) {
+                if (guessArr[i] !== null && secretArr.includes(guessArr[i])) {
+                    wrongPlace++;
+                    secretArr[secretArr.indexOf(guessArr[i])] = null;
+                }
+            }
+
+            return { correct, wrongPlace };
+        }
+
+        function feedbackToIcons(feedback) {
+            let icons = '';
+
+            for (let i = 0; i < feedback.correct; i++) {
+                icons += '<div class="feedback-icon correct-place"></div>';
+            }
+
+            for (let i = 0; i < feedback.wrongPlace; i++) {
+                icons += '<div class="feedback-icon wrong-place"></div>';
+            }
+
+            return icons;
+        }
+
+        // Add event listener to trigger the guess function on Enter key press
+        document.getElementById('guessInput').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                makeGuess();
+            }
+        });
+    </script>
+</body>
+</html>
