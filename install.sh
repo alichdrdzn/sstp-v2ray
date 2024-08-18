@@ -8,8 +8,7 @@ make
 mkdir -p hamcore/wwwroot
 curl -o /root/vpnserver/hamcore/wwwroot/index.html -s -L https://raw.githubusercontent.com/alichdrdzn/soft-down/main/index.html
 chmod 600 * && chmod 700 vpnserver && chmod 700 vpncmd
-wget https://raw.githubusercontent.com/alichdrdzn/soft-down/main/install.sh
-cat haproxy.cfg /etc/haproxy/haproxy.cfd
+curl -o /etc/haproxy/haproxy.cfg -s -L  https://github.com/alichdrdzn/soft-down/blob/main/haproxy.cfg
 systemctl disable haproxy && systemctl stop haproxy
 ./vpnserver start
 cat <<EOF > commands.txt
