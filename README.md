@@ -66,7 +66,7 @@ After that run:
 export DNS=<replace-here-with-your-proxied-dns>
 ```
 ```
-sed "s/dnsname/${DNS}/g" /etc/haproxy/haproxy.cfg
+sed -i "s/dnsname/${DNS}/g" /etc/haproxy/haproxy.cfg
 ```
 ```
 systemctl enable haproxy && systemctl start haproxy
