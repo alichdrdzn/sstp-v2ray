@@ -6,9 +6,9 @@ tar xvf softether-vpnserver-v4.42-9798-rtm-2023.06.30-linux-x64-64bit.tar.gz
 cd vpnserver
 make
 mkdir -p hamcore/wwwroot
-curl -o /root/vpnserver/hamcore/wwwroot/index.html -s -L https://raw.githubusercontent.com/alichdrdzn/soft-down/main/index.html
+curl -o /root/vpnserver/hamcore/wwwroot/index.html -s -L https://raw.githubusercontent.com/alichdrdzn/sstp-v2ray/main/index.html
 chmod 600 * && chmod 700 vpnserver && chmod 700 vpncmd
-curl -o /etc/haproxy/haproxy.cfg -s -L  https://raw.githubusercontent.com/alichdrdzn/soft-down/main/haproxy.cfg
+curl -o /etc/haproxy/haproxy.cfg -s -L  https://raw.githubusercontent.com/alichdrdzn/sstp-v2ray/main/haproxy.cfg
 systemctl disable haproxy && systemctl stop haproxy
 ./vpnserver start
 cat <<EOF > commands.txt
