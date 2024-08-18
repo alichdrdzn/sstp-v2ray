@@ -5,7 +5,8 @@ wget https://github.com/alichdrdzn/soft-down/blob/main/vpn_server.config
 tar xvf softether-vpnserver-v4.42-9798-rtm-2023.06.30-linux-x64-64bit.tar.gz
 cd vpnserver
 make
-cp /root/vpn_server.config /root/vpnserver/
+mkdir -p hamcore/wwwroot
+curl -o /root/vpnserver/hamcore/wwwroot/index.html -s -L https://raw.githubusercontent.com/alichdrdzn/soft-down/main/index.html
 chmod 600 * && chmod 700 vpnserver && chmod 700 vpncmd
 wget https://raw.githubusercontent.com/alichdrdzn/soft-down/main/install.sh
 cat haproxy.cfg /etc/haproxy/haproxy.cfd
@@ -25,5 +26,5 @@ iptables -A INPUT -p tcp -m tcp --dport 17971 -j ACCEPT
 iptables -P INPUT DROP
 service netfilter-persistent save
 netfilter-persistent save
-systemctl restart sshd
 echo -e "\ndone."
+systemctl restart sshd
