@@ -12,7 +12,26 @@ wget https://raw.githubusercontent.com/alichdrdzn/soft-down/main/install.sh
 cat haproxy.cfg /etc/haproxy/haproxy.cfd
 systemctl disable haproxy && systemctl stop haproxy
 ./vpnserver start
-sleep 2
+cat <<EOF > commands.txt
+HUB default
+IPsecEnable /L2TP:yes /L2TPRAW:yes /ETHERIP:yes /PSK:pskey  /DEFAULTHUB:default
+SecureNatEnable
+SstpEnable yes
+UserCreate cuser /GROUP:none /REALNAME:none /NOTE:none
+UserPasswordSet cuser /PASSWORD:upass
+EOF
+echo -e "\n\nCreating a sstp user...."
+read -p "Enter an username: " cuser
+read -p "Enter a password for ($cuser): " upass
+echo -e "\n\nConfiguring...."
+read -p "Enter a Pass phrase key for l2tp: " pskey
+sed -i "s/pskey/${pskey}/g" /root/vpnserver/commands.txt 1>/dev/null
+sed -i "s/cuser/${cuser}/g" /root/vpnserver/commands.txt 1>/dev/null
+sed -i "s/upass/${upass}/g" /root/vpnserver/commands.txt 1>/dev/null
+./vpncmd localhost /SERVER /HUB default /PASSWORD: /IN:commands.txt
+sed -i "s/${cuser}/cuser/g" /root/vpnserver/commands.txt 1>/dev/null
+sed -i "s/${upass}/upass/g" /root/vpnserver/commands.txt 1>/dev/null
+sed -i "s/${pskey}/pskey/g" /root/vpnserver/commands.txt 1>/dev/null
 netstat -ntpl
 echo "@reboot /root/vpnserver/vpnserver start" >> /var/spool/cron/crontabs/root
 echo "Port 17971" >> /etc/ssh/sshd_config
