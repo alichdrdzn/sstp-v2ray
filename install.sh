@@ -41,6 +41,8 @@ iptables -A INPUT -p tcp -m tcp --sport 53 -j ACCEPT
 iptables -A INPUT -p tcp -m udp --sport 53 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 17971 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 8443 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 iptables -P INPUT DROP
 service netfilter-persistent save
 netfilter-persistent save
