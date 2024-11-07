@@ -54,7 +54,7 @@ Exit the vpncmd.
 Xray installtion
 -------------------------------
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/alireza0/x-ui/master/install.sh)
 ```
 >The script will ask if you like to customize the panel settings, choose as you wish.
 
