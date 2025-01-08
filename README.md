@@ -20,13 +20,13 @@ Connect to the server using port 17971. and install certbot:
 sudo snap install --classic certbot
 ```
 **Issue a certificate:** \
-First create two `A record` in Cloudflare for your two sub domains to point to your server \
-one with `proxy off` and the other with `proxy on` option. After that run:
+First create an `A record` in Cloudflare for your sub domain to point to your server \
+with `proxy off` option. After that run:
 ```
 certbot certonly --standalone  --key-type rsa
 ```
 The above command will ask you to set your domain name, <mark>set both DNS that you created in Cloudflare</mark>. \
-
+Go back and enable the proxy option in cloudflare. \
 follow on to configure v2ray + sstp
 
 In order to use V2ray you should change the sstp port:
