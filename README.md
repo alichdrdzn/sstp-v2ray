@@ -26,17 +26,6 @@ one with `proxy off` and the other with `proxy on` option. After that run:
 certbot certonly --standalone  --key-type rsa
 ```
 The above command will ask you to set your domain name, <mark>set both DNS that you created in Cloudflare</mark>. \
-To set certificate for your vpn server: 
-1. execute vpncmd using `/root/vpnserver/vpncmd`
-2. choose 1
-3. go to the default hub using `HUB default'
-4. run:
-```
-ServerCertSet
-```
-Enter the location of the certificate and its key, it should be something like: \
-`/etc/letsencrypt/live/<domain-name>/fullchain.pem` and `/etc/letsencrypt/live/<domain-name>/privkey.pem` 
->Once the steps is finished, You can connect to the SSTP using the domain name. 
 
 follow on to configure v2ray + sstp
 
